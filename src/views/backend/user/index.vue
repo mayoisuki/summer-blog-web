@@ -23,9 +23,9 @@
       <!--      用户列表-->
       <el-table :data="dataList" border stripe>
         <el-table-column type="index" label="#"/>
-        <el-table-column label="头像" prop="avatar" width="80px">
+        <el-table-column label="头像" prop="avatar" width="100">
           <template slot-scope="scope" >
-            <img :src="scope.row.avatar" width="70px" height="70px"/>
+            <img :src="scope.row.avatar" width="70px" height="70px" style="margin-left: 5px"/>
           </template>
         </el-table-column>
         <el-table-column label="用户名" prop="username"/>

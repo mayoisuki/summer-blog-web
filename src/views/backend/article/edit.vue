@@ -7,6 +7,9 @@
             <el-input v-model="form.title"/>
           </el-form-item>
           <el-form-item label="内容">
+            <el-input v-model="form.content"/>
+          </el-form-item>
+          <el-form-item label="内容">
               <TinymceEditor v-model="form.content" style="height: 350px"></TinymceEditor>
           </el-form-item>
           <el-form-item label="分类">
@@ -72,7 +75,9 @@
       },
 
       save() {
+        console.log('this.form.content',this.form.content)
         saveOrUpdate(this.form).then(res => {
+
           this.$message.success('保存成功')
           this.back()
         })

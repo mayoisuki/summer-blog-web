@@ -51,8 +51,8 @@
 
 <script>
   import { saveOrUpdate, tree,removeById } from '@/api/category'
-  import AddFirstDialog from '@/views/category/Dialog/AddFirstDialog'
-  import AddChildDialog from '@/views/category/Dialog/AddChildDialog'
+  import AddFirstDialog from '@/views/backend/category/Dialog/AddFirstDialog'
+  import AddChildDialog from '@/views/backend/category/Dialog/AddChildDialog'
 
   export default {
     components:{

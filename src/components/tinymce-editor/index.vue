@@ -11,6 +11,7 @@
   import './plugins/image/plugin.min.js'
   import './plugins/table/plugin.min.js'
   import './plugins/imagetools/plugin.min.js'
+  import store from '@/store'
 
   export default {
     name: 'index',
@@ -49,10 +50,10 @@
         //  插件
         plugins: 'preview link image table imagetools',
         //图片上传地址
-        images_upload_url: '/api/file/tinymce/uploads',
+        images_upload_url: '/api/file/tinymce/uploads?X-Token='+store.getters.token,
         //设置监听事件
         setup: (editor) =>{
-          editor.on('input undo redo execCommand', (e)=> {
+          editor.on('input change undo redo execCommand', (e)=> {
             //设置flag为false,不调用tinyMCE.activeEditor.setContent(val);
             this.flag=false;
             this.$emit('input', editor.getContent());

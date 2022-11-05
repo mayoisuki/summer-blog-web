@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!item.hidden">
+  <div v-if="!item.hidden && isHasRole">
     <template v-if="hasOneShowingChild(item.children,item) && (!onlyOneChild.children||onlyOneChild.noShowingChildren)&&!item.alwaysShow">
       <app-link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)">
         <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{'submenu-title-noDropdown':!isNest}">
@@ -30,6 +30,7 @@ import { isExternal } from '@/utils/validate'
 import Item from './Item'
 import AppLink from './Link'
 import FixiOSBug from './FixiOSBug'
+import store from '@/store'
 
 export default {
   name: 'SidebarItem',
@@ -54,7 +55,21 @@ export default {
     // To fix https://github.com/PanJiaChen/vue-admin-template/issues/237
     // TODO: refactor with render function
     this.onlyOneChild = null
-    return {}
+    return {
+      //判断当前用户角色是否为admin
+      isHasRole:true
+    }
+  },
+  created() {
+    //如果路由有设置roles属性，即需要根据用户角色控制是否展示
+    if (this.item.roles!==undefined){
+      //获取登录用户的角色
+      const role=store.getters.role
+      //如果路由的roles属性没包括登录用户的角色，isHasRole设置为false
+      if (!this.item.roles.includes(role)){
+        this.isHasRole=false
+      }
+    }
   },
   methods: {
     hasOneShowingChild(children = [], parent) {
