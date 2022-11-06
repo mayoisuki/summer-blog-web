@@ -6,7 +6,8 @@ const getDefaultState = () => {
   return {
     token: getToken(),
     name: '',
-    avatar: ''
+    avatar: '',
+    role:''
   }
 }
 
@@ -24,6 +25,12 @@ const mutations = {
   },
   SET_AVATAR: (state, avatar) => {
     state.avatar = avatar
+  },
+  SET_ROLE: (state, role) => {
+    state.role = role
+  },
+  SET_USER_ID: (state, userId) => {
+    state.userId = userId
   }
 }
 
@@ -55,9 +62,12 @@ const actions = {
         if (!data) {
           return reject('Token已过期，请重新登录')
         }
-
+        console.log('data.role',data.role)
         commit('SET_NAME', data.nickname)
         commit('SET_AVATAR', data.avatar)
+        commit('SET_ROLE', data.role)
+        commit('SET_USER_ID', data.id)
+        console.log('SET_USER_ID',data.id)
         resolve(data)
       }).catch(error => {
         reject(error)

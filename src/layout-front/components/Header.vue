@@ -27,11 +27,11 @@
     <el-menu-item v-if="isLogin" style="float: right">
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
-          <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
+          <img :src="imageUrl" class="user-avatar">
           <i class="el-icon-caret-bottom"/>
         </div>
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
-          <router-link to="/admin/dashboard">
+          <router-link to="/admin/dashboard/index">
             <el-dropdown-item>
               后台管理
             </el-dropdown-item>
@@ -61,6 +61,7 @@
 <script>
   import { getToken } from '@/utils/auth'
   import { mapGetters } from 'vuex'
+  import store from '@/store'
 
   export default {
     name: 'Header',
@@ -68,7 +69,8 @@
       return {
         // isLogin: false,
         // avatar: '',
-        name: ''
+        name: '',
+        // imageUrl:this.avatar+'?X-Token='+store.getters.token
       }
     },
     computed:{
@@ -77,14 +79,17 @@
       },
       ...mapGetters([
         'avatar'
-      ])
+      ]),
+      imageUrl(){
+        return this.avatar+'?X-Token='+store.getters.token
+      }
     },
     created() {
-      // console.log('this.isLogin',this.isLogin)
+      console.log('this.imageUrl',this.imageUrl)
     },
     methods: {
       handleSelect(key, keyPath) {
-        console.log(key, keyPath);
+        // console.log(key, keyPath);
       },
       async logout() {
         await this.$store.dispatch('user/logout')

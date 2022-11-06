@@ -5,7 +5,8 @@
     :visible.sync="dialogVisible"
     width="50%"
     @open="initDialog"
-    @close="closeDialog">
+    :before-close="closeDialog"
+    >
     <el-form ref="formRef" :model="form" :rules="formRules" label-width="100px">
       <el-form-item label="分类名称" prop="name"><el-input v-model="form.name" ></el-input></el-form-item>
     </el-form>

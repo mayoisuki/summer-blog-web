@@ -65,7 +65,7 @@ export const constantRoutes = [
       },
       {
         path: '/category/:categoryId',
-        name: 'List',
+        name: 'CategoryList',
         component: () => import('@/views/frontend/article-list/index')
       },
     ],
